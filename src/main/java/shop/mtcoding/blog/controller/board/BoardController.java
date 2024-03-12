@@ -1,5 +1,6 @@
 package shop.mtcoding.blog.controller.board;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,12 @@ import java.util.List;
 @Controller
 public class BoardController {
     private final BoardNativeRepository boardNativeRepository;
+
+    @PostMapping("/board/{id}/delete")
+    public String delete(@PathVariable Integer id){
+        boardNativeRepository.deleteById(id);
+        return "redirect:/";
+    }
 
     @PostMapping("/board/save")
     public String save(String title, String content, String username){
